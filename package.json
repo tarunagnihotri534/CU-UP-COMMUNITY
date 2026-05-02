@@ -13,9 +13,17 @@
     "lint": "biome lint",
     "lint:write": "biome lint --write",
     "type-check": "tsc --noEmit",
-    "prepare": "husky",
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky; fi",
     "report:monthly": "node scripts/posthog-report.js --month",
     "report:weekly": "node scripts/posthog-report.js --week"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "cloudflared",
+      "sharp",
+      "core-js",
+      "protobufjs"
+    ]
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json}": [
