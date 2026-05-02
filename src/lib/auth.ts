@@ -133,7 +133,7 @@ export async function registerStudent(data: {
   name: string;
   email: string;
   password: string;
-  enrollmentNo: string;
+  enrollmentNo?: string;
   department?: string;
 }): Promise<
   { success: true; token: string } | { success: false; error: string }

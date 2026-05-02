@@ -229,6 +229,85 @@ export function EventDetailsDialog({
                   <p className="font-medium text-lg">{event.location}</p>
                 </div>
 
+                {/* Quick Info */}
+                {(event.mode || event.teamSize || event.eligibility || event.conductedBy || (event.rounds && event.rounds.length > 0) || (event.prizes && event.prizes.length > 0) || (event.perks && event.perks.length > 0)) && (
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
+                      Event Details
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {event.conductedBy && (
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Conducted by
+                          </p>
+                          <p className="text-sm">{event.conductedBy}</p>
+                        </div>
+                      )}
+                      {event.mode && (
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Format
+                          </p>
+                          <p className="text-sm">{event.mode}</p>
+                        </div>
+                      )}
+                      {event.teamSize && (
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Team size
+                          </p>
+                          <p className="text-sm">{event.teamSize}</p>
+                        </div>
+                      )}
+                      {event.eligibility && (
+                        <div className="space-y-1">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Eligibility
+                          </p>
+                          <p className="text-sm">{event.eligibility}</p>
+                        </div>
+                      )}
+                      {event.rounds && event.rounds.length > 0 && (
+                        <div className="space-y-1 md:col-span-2">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Competition rounds
+                          </p>
+                          <ul className="list-disc list-inside text-sm">
+                            {event.rounds.map((round, idx) => (
+                              <li key={idx}>{round}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {event.prizes && event.prizes.length > 0 && (
+                        <div className="space-y-1 md:col-span-2">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Prizes
+                          </p>
+                          <ul className="list-disc list-inside text-sm">
+                            {event.prizes.map((prize, idx) => (
+                              <li key={idx}>{prize}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {event.perks && event.perks.length > 0 && (
+                        <div className="space-y-1 md:col-span-2">
+                          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                            Participant perks
+                          </p>
+                          <ul className="list-disc list-inside text-sm">
+                            {event.perks.map((perk, idx) => (
+                              <li key={idx}>{perk}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* Description */}
                 <DialogDescription asChild>
                   <div className="space-y-3">

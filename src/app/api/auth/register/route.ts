@@ -5,9 +5,9 @@ export async function POST(request: Request) {
   try {
     const { name, email, password, enrollmentNo, department } =
       await request.json();
-    if (!name || !email || !password || !enrollmentNo)
+    if (!name || !email || !password)
       return NextResponse.json(
-        { error: "All fields are required" },
+        { error: "Name, Email, and Password are required" },
         { status: 400 },
       );
     if (password.length < 6)

@@ -69,8 +69,10 @@ export async function getEvents(
     !process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL ||
     !process.env.GOOGLE_PRIVATE_KEY
   ) {
-    console.warn("getEvents: Missing Google Sheets configuration.");
-    return [];
+    console.warn(
+      "getEvents: Missing Google Sheets configuration. Falling back to local events.",
+    );
+    return await readLocalEvents();
   }
 
   try {

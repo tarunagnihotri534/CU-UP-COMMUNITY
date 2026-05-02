@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "CU-UP Coding Club",
+    "college": "Chandigarh University, Uttar Pradesh",
+    "description": "The flagship coding community of CU-UP, focused on competitive programming, data structures, algorithms, and building problem-solving skills through weekly contests and peer-to-peer learning sessions.",
+    "logo": "/community-logos/coding-club.png",
+    "website": "https://cuuptech.in/clubs/coding",
+    "createdAt": "2026-03-16T08:57:19.205Z",
+    "updatedAt": "2026-03-16T08:57:19.205Z"
+  },
+  {
+    "id": 2,
+    "name": "AI & ML Society",
+    "college": "Chandigarh University, Uttar Pradesh",
+    "description": "A research and project-driven society exploring artificial intelligence, machine learning, computer vision, and NLP. Members build AI-powered projects and participate in national ML competitions.",
+    "logo": "/community-logos/aiml.png",
+    "website": "https://cuuptech.in/clubs/aiml",
+    "createdAt": "2026-03-16T08:57:19.205Z",
+    "updatedAt": "2026-03-16T08:57:19.205Z"
+  },
+  {
+    "id": 3,
+    "name": "CyberSec Club",
+    "college": "Chandigarh University, Uttar Pradesh",
+    "description": "Dedicated to cybersecurity education, ethical hacking, CTF competitions, and building a security-first mindset among students. Members learn offensive and defensive security techniques in a hands-on environment.",
+    "logo": "/community-logos/cybersec.png",
+    "website": "https://cuuptech.in/clubs/cybersec",
+    "createdAt": "2026-03-16T08:57:19.205Z",
+    "updatedAt": "2026-03-16T08:57:19.205Z"
+  },
+  {
+    "id": 4,
+    "name": "Web & App Dev Society",
+    "college": "Chandigarh University, Uttar Pradesh",
+    "description": "Focused on full-stack web development and mobile app development. Members collaborate on real-world products, learn modern frameworks, and ship open-source projects that solve campus and community problems.",
+    "logo": "/community-logos/webdev.png",
+    "website": "https://cuuptech.in/clubs/webdev",
+    "createdAt": "2026-03-16T08:57:19.205Z",
+    "updatedAt": "2026-03-16T08:57:19.205Z"
+  },
+  {
+    "id": 5,
+    "name": "Robotics & IoT Club",
+    "college": "Chandigarh University, Uttar Pradesh",
+    "description": "Bridging software and hardware, this club focuses on robotics, embedded systems, IoT projects, and automation. Members build physical prototypes and compete in national-level robotics championships.",
+    "logo": "/community-logos/robotics.png",
+    "website": "https://cuuptech.in/clubs/robotics",
+    "createdAt": "2026-03-16T08:57:19.205Z",
+    "updatedAt": "2026-03-16T08:57:19.205Z"
+  },
+  {
+    "id": 6,
+    "name": "Open Source Society",
+    "college": "Chandigarh University, Uttar Pradesh",
+    "description": "Champions of open-source culture at CU-UP. This society helps students make their first open-source contributions, participate in programs like GSSoC and Hacktoberfest, and build publicly shareable portfolios.",
+    "logo": "/community-logos/oss.png",
+    "website": "https://cuuptech.in/clubs/opensource",
+    "createdAt": "2026-03-16T08:57:19.205Z",
+    "updatedAt": "2026-03-16T08:57:19.205Z"
+  }
+]

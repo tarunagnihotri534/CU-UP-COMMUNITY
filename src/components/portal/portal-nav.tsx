@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   AlertTriangle,
@@ -9,7 +10,7 @@ import {
   BookOpen,
   LayoutDashboard,
   LogOut,
-  MapPinned,
+  MapPin,
   MessageSquare,
   Settings,
   Shield,
@@ -17,12 +18,14 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { LocationScanner } from "@/components/location-scanner";
 
 interface NavItem {
-  href: string;
+  href?: string;
   label: string;
   icon: React.ReactNode;
   badge?: number;
+  action?: () => void;
 }
 
 interface PortalNavProps {
@@ -41,6 +44,7 @@ export function PortalNav({
   pendingCount = 0,
 }: PortalNavProps) {
   const pathname = usePathname();
+  const [isLocationScannerOpen, setIsLocationScannerOpen] = useState(false);
 
   const studentLinks: NavItem[] = [
     {
@@ -64,9 +68,9 @@ export function PortalNav({
       icon: <MessageSquare className="h-4 w-4" />,
     },
     {
-      href: "/student/location",
       label: "Campus Locator",
-      icon: <MapPinned className="h-4 w-4" />,
+      icon: <MapPin className="h-4 w-4" />,
+      action: () => setIsLocationScannerOpen(true),
     },
   ];
 
@@ -140,29 +144,44 @@ export function PortalNav({
 
       {/* Nav links */}
       <nav className="flex-1 px-3 py-4 space-y-1">
-        {links.map((link) => (
-          <Link
-            key={link.href}
-            href={link.href}
-            className={cn(
-              "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
-              pathname === link.href
-                ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400"
-                : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100",
-            )}
-          >
-            {link.icon}
-            <span>{link.label}</span>
-            {link.badge != null && link.badge > 0 && (
-              <Badge
-                variant="destructive"
-                className="ml-auto text-xs px-1.5 py-0.5 min-w-[1.25rem] justify-center"
+        {links.map((link) => {
+          if (link.href) {
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
+                  pathname === link.href
+                    ? "bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400"
+                    : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100",
+                )}
               >
-                {link.badge}
-              </Badge>
-            )}
-          </Link>
-        ))}
+                {link.icon}
+                <span>{link.label}</span>
+                {link.badge != null && link.badge > 0 && (
+                  <Badge
+                    variant="destructive"
+                    className="ml-auto text-xs px-1.5 py-0.5 min-w-[1.25rem] justify-center"
+                  >
+                    {link.badge}
+                  </Badge>
+                )}
+              </Link>
+            );
+          }
+
+          return (
+            <button
+              key={link.label}
+              onClick={link.action}
+              className="w-full text-left flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:text-zinc-900 dark:hover:text-zinc-100"
+            >
+              {link.icon}
+              <span>{link.label}</span>
+            </button>
+          );
+        })}
       </nav>
 
       {/* Back to site + Logout */}
@@ -183,6 +202,14 @@ export function PortalNav({
           Sign Out
         </Button>
       </div>
+
+      {/* Location Scanner Modal */}
+      {role === "student" && (
+        <LocationScanner
+          isOpen={isLocationScannerOpen}
+          onOpenChange={setIsLocationScannerOpen}
+        />
+      )}
     </aside>
   );
 }

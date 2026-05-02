@@ -1,0 +1,35 @@
+[
+  {
+    "id": "ann-hack-o-phobia-4-2026",
+    "title": "HACK O PHOBIA 4.0 Registration is LIVE!",
+    "content": "Get ready for the biggest 48-hour hackathon! Registration for HACK O PHOBIA 4.0 is now open. Form your teams and submit your innovative ideas to win prizes worth ₹5 Lakhs.",
+    "priority": "urgent",
+    "target": "students",
+    "postedBy": "staff-001",
+    "postedByName": "CU-UP Admin",
+    "createdAt": "2026-05-01T09:00:00.000Z",
+    "expiresAt": "2026-05-20T23:59:59.000Z"
+  },
+  {
+    "id": "ann-internship-drive-2026",
+    "title": "Summer Internship Drive 2026",
+    "content": "Major tech companies including Google, Microsoft, and Amazon are visiting the campus for the Summer 2026 Internship Drive. Check the placement portal for eligibility and registration links.",
+    "priority": "normal",
+    "target": "students",
+    "postedBy": "staff-001",
+    "postedByName": "CU-UP Admin",
+    "createdAt": "2026-05-02T11:00:00.000Z",
+    "expiresAt": "2026-06-01T23:59:59.000Z"
+  },
+  {
+    "id": "ann-quantum-lecture-2026",
+    "title": "Guest Lecture: The Future of Quantum Computing",
+    "content": "Join us for an exclusive guest lecture by Dr. Alan Turing (reimagined) on the advancements in Quantum Algorithms. Venue: Block B Auditorium. Time: 2:00 PM - 4:00 PM.",
+    "priority": "normal",
+    "target": "students",
+    "postedBy": "staff-001",
+    "postedByName": "CU-UP Admin",
+    "createdAt": "2026-05-02T14:00:00.000Z",
+    "expiresAt": "2026-05-05T23:59:59.000Z"
+  }
+]

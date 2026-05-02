@@ -7,6 +7,7 @@ import {
   AlertTriangle,
   Bell,
   BookOpen,
+  CalendarDays,
   CheckCircle,
   Clock,
   Github,
@@ -25,6 +26,7 @@ import type {
   PortalProject,
   RaggingReport,
 } from "@/types/portal";
+import type { IEvent } from "@/calendar/interfaces";
 
 export default function StudentDashboard() {
   const { authenticated, loading, name, email, userId, logout } =
@@ -33,17 +35,26 @@ export default function StudentDashboard() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [myProjects, setMyProjects] = useState<PortalProject[]>([]);
   const [myReports, setMyReports] = useState<RaggingReport[]>([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Professional loading sequence
+    const timer = setTimeout(() => setIsLoaded(true), 1200);
+    return () => clearTimeout(timer);
+  }, []);
 
   const fetchData = useCallback(async () => {
-    const [annsRes, projRes] = await Promise.all([
+    const [annsRes, projRes, eventsRes] = await Promise.all([
       fetch("/api/portal/announcements"),
       fetch("/api/portal/projects"),
+      fetch("/api/portal/events"),
     ]);
     if (annsRes.ok) setAnnouncements(await annsRes.json());
     if (projRes.ok) {
       const projs: PortalProject[] = await projRes.json();
       setMyProjects(projs.filter((p) => p.submittedBy === userId));
     }
+    if (eventsRes.ok) setEvents(await eventsRes.json());
   }, [userId]);
 
   useEffect(() => {
@@ -58,7 +69,34 @@ export default function StudentDashboard() {
     return () => clearInterval(id);
   }, [authenticated, fetchData]);
 
-  if (loading) return <LoadingScreen />;
+  if (loading || !isLoaded) {
+    return (
+      <div className="min-h-screen bg-[#0f172a] flex flex-col items-center justify-center p-4">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex flex-col items-center"
+        >
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center mb-6 shadow-2xl shadow-red-600/20">
+            <GraduationCap size={40} className="text-white" />
+          </div>
+          <h2 className="text-white font-black text-xl tracking-[0.2em]">CU-UP</h2>
+          <div className="mt-4 flex gap-1.5">
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                animate={{ scale: [1, 1.4, 1], opacity: [0.3, 1, 0.3] }}
+                transition={{ repeat: Infinity, duration: 1, delay: i * 0.2 }}
+                className="w-2 h-2 rounded-full bg-red-600"
+              />
+            ))}
+          </div>
+          <p className="text-zinc-500 text-xs mt-8 uppercase tracking-widest font-bold">Synchronizing Portal...</p>
+        </motion.div>
+      </div>
+    );
+  }
+
   if (!authenticated) return null;
 
   const pendingProjects = myProjects.filter(
@@ -250,6 +288,20 @@ export default function StudentDashboard() {
                   <Button
                     asChild
                     variant="outline"
+                    className="w-full justify-start gap-2 border-blue-200"
+                  >
+                    <a
+                      href="https://roadmap.sh/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <BookOpen className="h-4 w-4 text-blue-600" /> Career
+                      Roadmaps
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
                     className="w-full justify-start gap-2 border-purple-200"
                   >
                     <a
@@ -259,6 +311,15 @@ export default function StudentDashboard() {
                     >
                       <Zap className="h-4 w-4 text-purple-600" /> Resume Builder
                     </a>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="w-full justify-start gap-2 border-sky-200"
+                  >
+                    <Link href="/calendar">
+                      <CalendarDays className="h-4 w-4 text-sky-600" /> View Events
+                    </Link>
                   </Button>
                   <Button
                     asChild
@@ -314,6 +375,72 @@ export default function StudentDashboard() {
                 </Card>
               )}
             </div>
+          </div>
+
+          {/* Ongoing Campus Events */}
+          <div className="mt-8">
+            <Card className="border-0 shadow-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <CalendarDays className="h-4 w-4 text-green-600" /> Ongoing Campus Events
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {(() => {
+                  const now = new Date();
+                  const ongoingEvents = events
+                    .map((e) => ({
+                      ...e,
+                      start: new Date(e.startDateTime),
+                      end: new Date(e.endDateTime),
+                    }))
+                    .filter((e) => {
+                      const isOngoing = e.start <= now && e.end >= now;
+                      const isUpcomingTag =
+                        e.tags?.includes("upcoming") && e.start >= now;
+                      return isOngoing || isUpcomingTag;
+                    });
+
+                  return ongoingEvents.length === 0 ? (
+                    <p className="text-zinc-400 text-sm text-center py-6">
+                      No events currently ongoing on campus
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      {ongoingEvents.slice(0, 5).map((event) => {
+                        const isUpcoming =
+                          event.tags?.includes("upcoming") &&
+                          event.start > now;
+                        return (
+                          <div
+                            key={event.id}
+                            className="p-4 rounded-xl border border-zinc-100 dark:border-zinc-800 bg-white dark:bg-zinc-900"
+                          >
+                            <div className="flex items-start justify-between gap-2">
+                              <p className="font-semibold text-sm text-zinc-900 dark:text-white">
+                                {event.title}
+                              </p>
+                              <Badge
+                                variant="outline"
+                                className="text-xs shrink-0"
+                              >
+                                {isUpcoming ? "Upcoming" : "Ongoing"}
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">
+                              {event.description}
+                            </p>
+                            <p className="text-xs text-zinc-400 mt-2">
+                              📍 {event.location} · 🕒 {event.time}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+              </CardContent>
+            </Card>
           </div>
         </motion.div>
       </main>

@@ -24,6 +24,14 @@ export interface IEvent {
   organizationName?: string;
   posterUrl?: string;
   tags?: string[];
+  // Additional optional fields for richer event details
+  mode?: string;
+  teamSize?: string;
+  eligibility?: string;
+  rounds?: string[];
+  conductedBy?: string;
+  prizes?: string[];
+  perks?: string[];
 }
 
 export interface ICalendarCell {
