@@ -96,7 +96,7 @@ export default function StudentDashboard() {
             ))}
           </div>
           <p className="text-zinc-500 text-xs mt-8 uppercase tracking-widest font-bold">
-            Synchronizing Portal...
+            Initializing Student Portal...
           </p>
         </motion.div>
       </div>
