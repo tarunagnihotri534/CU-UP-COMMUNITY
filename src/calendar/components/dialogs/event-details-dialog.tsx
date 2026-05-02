@@ -230,7 +230,13 @@ export function EventDetailsDialog({
                 </div>
 
                 {/* Quick Info */}
-                {(event.mode || event.teamSize || event.eligibility || event.conductedBy || (event.rounds && event.rounds.length > 0) || (event.prizes && event.prizes.length > 0) || (event.perks && event.perks.length > 0)) && (
+                {(event.mode ||
+                  event.teamSize ||
+                  event.eligibility ||
+                  event.conductedBy ||
+                  (event.rounds && event.rounds.length > 0) ||
+                  (event.prizes && event.prizes.length > 0) ||
+                  (event.perks && event.perks.length > 0)) && (
                   <div className="space-y-2">
                     <h4 className="text-sm font-medium uppercase tracking-wider text-muted-foreground">
                       Event Details

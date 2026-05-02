@@ -2,4 +2,3 @@
 // Please import and use LocationScanner from location-scanner.tsx instead
 
 export const UniversityLocator = () => null;
-

@@ -35,6 +35,7 @@ export default function StudentDashboard() {
   const [announcements, setAnnouncements] = useState<Announcement[]>([]);
   const [myProjects, setMyProjects] = useState<PortalProject[]>([]);
   const [myReports, setMyReports] = useState<RaggingReport[]>([]);
+  const [events, setEvents] = useState<IEvent[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -80,7 +81,9 @@ export default function StudentDashboard() {
           <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center mb-6 shadow-2xl shadow-red-600/20">
             <GraduationCap size={40} className="text-white" />
           </div>
-          <h2 className="text-white font-black text-xl tracking-[0.2em]">CU-UP</h2>
+          <h2 className="text-white font-black text-xl tracking-[0.2em]">
+            CU-UP
+          </h2>
           <div className="mt-4 flex gap-1.5">
             {[0, 1, 2].map((i) => (
               <motion.div
@@ -91,7 +94,9 @@ export default function StudentDashboard() {
               />
             ))}
           </div>
-          <p className="text-zinc-500 text-xs mt-8 uppercase tracking-widest font-bold">Synchronizing Portal...</p>
+          <p className="text-zinc-500 text-xs mt-8 uppercase tracking-widest font-bold">
+            Synchronizing Portal...
+          </p>
         </motion.div>
       </div>
     );
@@ -181,7 +186,8 @@ export default function StudentDashboard() {
                 </p>
                 <h2 className="text-2xl font-bold mt-2">Campus QR Locator</h2>
                 <p className="mt-1 text-emerald-50">
-                  Scan QR, see your live location, and navigate yourself across campus.
+                  Scan QR, see your live location, and navigate yourself across
+                  campus.
                 </p>
               </div>
               <Button
@@ -318,7 +324,8 @@ export default function StudentDashboard() {
                     className="w-full justify-start gap-2 border-sky-200"
                   >
                     <Link href="/calendar">
-                      <CalendarDays className="h-4 w-4 text-sky-600" /> View Events
+                      <CalendarDays className="h-4 w-4 text-sky-600" /> View
+                      Events
                     </Link>
                   </Button>
                   <Button
@@ -336,7 +343,8 @@ export default function StudentDashboard() {
                     className="w-full justify-start gap-2 border-emerald-200"
                   >
                     <Link href="/student/location">
-                      <MapPinned className="h-4 w-4 text-emerald-600" /> Scan Campus QR
+                      <MapPinned className="h-4 w-4 text-emerald-600" /> Scan
+                      Campus QR
                     </Link>
                   </Button>
                 </CardContent>
@@ -382,7 +390,8 @@ export default function StudentDashboard() {
             <Card className="border-0 shadow-sm">
               <CardHeader className="pb-3">
                 <CardTitle className="flex items-center gap-2 text-base">
-                  <CalendarDays className="h-4 w-4 text-green-600" /> Ongoing Campus Events
+                  <CalendarDays className="h-4 w-4 text-green-600" /> Ongoing
+                  Campus Events
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -409,8 +418,7 @@ export default function StudentDashboard() {
                     <div className="space-y-3">
                       {ongoingEvents.slice(0, 5).map((event) => {
                         const isUpcoming =
-                          event.tags?.includes("upcoming") &&
-                          event.start > now;
+                          event.tags?.includes("upcoming") && event.start > now;
                         return (
                           <div
                             key={event.id}

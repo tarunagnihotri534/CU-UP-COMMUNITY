@@ -67,7 +67,7 @@ export default function StudentLogin() {
         setLoading(false);
         return;
       }
-      
+
       // Artificial delay for premium feel
       setTimeout(() => {
         if (data.role === "staff") router.push("/staff/dashboard");
@@ -99,12 +99,12 @@ export default function StudentLogin() {
 
       setLoading(false);
       setIsSuccess(true);
-      
+
       // Success flow: Show success then switch to login
       setTimeout(() => {
         setIsSuccess(false);
         setTab("login");
-        setFormData(prev => ({ ...prev, password: "" }));
+        setFormData((prev) => ({ ...prev, password: "" }));
       }, 2000);
     } catch (err) {
       setError("An unexpected error occurred");
@@ -128,7 +128,7 @@ export default function StudentLogin() {
           <div className="p-8 sm:p-10">
             {/* Header */}
             <div className="flex flex-col items-center mb-8">
-              <motion.div 
+              <motion.div
                 whileHover={{ rotate: 10, scale: 1.1 }}
                 className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center mb-4 shadow-lg shadow-red-600/20"
               >
@@ -138,7 +138,9 @@ export default function StudentLogin() {
                 {tab === "login" ? "Welcome Back" : "Join CU-UP"}
               </h2>
               <p className="text-zinc-400 text-sm mt-1">
-                {tab === "login" ? "Sign in to your student portal" : "Create your student account"}
+                {tab === "login"
+                  ? "Sign in to your student portal"
+                  : "Create your student account"}
               </p>
             </div>
 
@@ -182,14 +184,21 @@ export default function StudentLogin() {
                   >
                     <CheckCircle2 size={64} className="text-green-500 mb-4" />
                   </motion.div>
-                  <h3 className="text-xl font-bold text-white">Account Created!</h3>
-                  <p className="text-zinc-400 mt-2 text-sm">Welcome to the community. Redirecting to login...</p>
+                  <h3 className="text-xl font-bold text-white">
+                    Account Created!
+                  </h3>
+                  <p className="text-zinc-400 mt-2 text-sm">
+                    Welcome to the community. Redirecting to login...
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
 
             {/* Form */}
-            <form onSubmit={tab === "login" ? handleLogin : handleRegister} className="space-y-5">
+            <form
+              onSubmit={tab === "login" ? handleLogin : handleRegister}
+              className="space-y-5"
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={tab}
@@ -201,7 +210,9 @@ export default function StudentLogin() {
                 >
                   {tab === "register" && (
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-500 ml-1">Full Name</label>
+                      <label className="text-xs font-medium text-zinc-500 ml-1">
+                        Full Name
+                      </label>
                       <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus-within:border-red-500/50 transition-all">
                         <User size={18} className="text-zinc-500" />
                         <Input
@@ -217,7 +228,9 @@ export default function StudentLogin() {
                   )}
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-zinc-500 ml-1">Email Address</label>
+                    <label className="text-xs font-medium text-zinc-500 ml-1">
+                      Email Address
+                    </label>
                     <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus-within:border-red-500/50 transition-all">
                       <Mail size={18} className="text-zinc-500" />
                       <Input
@@ -233,7 +246,9 @@ export default function StudentLogin() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-zinc-500 ml-1">Password</label>
+                    <label className="text-xs font-medium text-zinc-500 ml-1">
+                      Password
+                    </label>
                     <div className="relative">
                       <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3 focus-within:border-red-500/50 transition-all">
                         <Lock size={18} className="text-zinc-500" />
@@ -259,7 +274,9 @@ export default function StudentLogin() {
 
                   {tab === "register" && (
                     <div className="space-y-1.5">
-                      <label className="text-xs font-medium text-zinc-500 ml-1">Department (optional)</label>
+                      <label className="text-xs font-medium text-zinc-500 ml-1">
+                        Department (optional)
+                      </label>
                       <Input
                         name="department"
                         placeholder="e.g. CSE"
@@ -294,7 +311,9 @@ export default function StudentLogin() {
                   </div>
                 ) : (
                   <div className="flex items-center gap-2">
-                    <span>{tab === "login" ? "Sign In" : "Create Account"}</span>
+                    <span>
+                      {tab === "login" ? "Sign In" : "Create Account"}
+                    </span>
                     <ArrowRight size={18} />
                   </div>
                 )}

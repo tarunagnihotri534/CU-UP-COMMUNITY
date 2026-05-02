@@ -3,7 +3,13 @@
 import { useState, useRef, useCallback } from "react";
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { MapPin, X, Camera } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -23,7 +29,10 @@ interface LocationScannerProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export function LocationScanner({ isOpen, onOpenChange }: LocationScannerProps) {
+export function LocationScanner({
+  isOpen,
+  onOpenChange,
+}: LocationScannerProps) {
   const [state, setState] = useState<LocationScannerState>({
     isScanning: false,
     currentLocation: null,
@@ -79,7 +88,7 @@ export function LocationScanner({ isOpen, onOpenChange }: LocationScannerProps) 
             facingMode: "environment",
           },
         },
-        false
+        false,
       );
 
       try {
@@ -90,7 +99,7 @@ export function LocationScanner({ isOpen, onOpenChange }: LocationScannerProps) 
           },
           () => {
             // Keep scanning
-          }
+          },
         );
       } catch (err) {
         setState((prev) => ({
@@ -180,7 +189,8 @@ export function LocationScanner({ isOpen, onOpenChange }: LocationScannerProps) 
                   {state.currentLocation.building && (
                     <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
                       {state.currentLocation.building}
-                      {state.currentLocation.floor && ` • Floor ${state.currentLocation.floor}`}
+                      {state.currentLocation.floor &&
+                        ` • Floor ${state.currentLocation.floor}`}
                     </p>
                   )}
                 </CardContent>

@@ -275,7 +275,11 @@ export default function StudentLocationPage() {
   const streamRef = useRef<MediaStream | null>(null);
   const zxingReaderRef = useRef<BrowserMultiFormatReader | null>(null);
   const zxingControlsRef = useRef<IScannerControls | null>(null);
-  const detectorRef = useRef<{ detect: (source: ImageBitmapSource) => Promise<Array<{ rawValue?: string }>> } | null>(null);
+  const detectorRef = useRef<{
+    detect: (
+      source: ImageBitmapSource,
+    ) => Promise<Array<{ rawValue?: string }>>;
+  } | null>(null);
 
   const [scannerStatus, setScannerStatus] = useState(
     bilingual("Ready to scan QR", "QR scan karne ke liye ready"),
@@ -403,7 +407,9 @@ export default function StudentLocationPage() {
         }
 
         setScannerStatus("Scanning in progress...");
-        setScannerStatus(bilingual("Scanning in progress...", "Scan chal raha hai..."));
+        setScannerStatus(
+          bilingual("Scanning in progress...", "Scan chal raha hai..."),
+        );
         setIsScanning(true);
         void scanFrame();
       } catch {
@@ -441,7 +447,9 @@ export default function StudentLocationPage() {
         },
       );
       zxingControlsRef.current = controls;
-      setScannerStatus(bilingual("Scanning in progress...", "Scan chal raha hai..."));
+      setScannerStatus(
+        bilingual("Scanning in progress...", "Scan chal raha hai..."),
+      );
       setIsScanning(true);
     } catch {
       setScannerStatus(
@@ -498,7 +506,8 @@ export default function StudentLocationPage() {
 
       const objectUrl = URL.createObjectURL(file);
       try {
-        const result = await zxingReaderRef.current.decodeFromImageUrl(objectUrl);
+        const result =
+          await zxingReaderRef.current.decodeFromImageUrl(objectUrl);
         const text = result.getText().trim();
         if (!text) {
           setScannerStatus(
@@ -566,10 +575,7 @@ export default function StudentLocationPage() {
     try {
       await navigator.clipboard.writeText(details);
       setScannerStatus(
-        bilingual(
-          "Location details copied.",
-          "Location details copy ho gaye.",
-        ),
+        bilingual("Location details copied.", "Location details copy ho gaye."),
       );
     } catch {
       setScannerStatus(
@@ -608,7 +614,10 @@ export default function StudentLocationPage() {
     setGeneratedPayload(raw);
     setGeneratedQr(qr);
     setScannerStatus(
-      bilingual("QR generated successfully.", "QR safalta se generate ho gaya."),
+      bilingual(
+        "QR generated successfully.",
+        "QR safalta se generate ho gaya.",
+      ),
     );
   }, [building, floor, latitude, longitude, spotName]);
 
@@ -641,7 +650,10 @@ export default function StudentLocationPage() {
     );
   }, []);
 
-  const hasScannedLocation = useMemo(() => parsedLocation != null, [parsedLocation]);
+  const hasScannedLocation = useMemo(
+    () => parsedLocation != null,
+    [parsedLocation],
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -669,7 +681,9 @@ export default function StudentLocationPage() {
 
     const BarcodeDetectorCtor = (
       window as unknown as {
-        BarcodeDetector: new (options?: { formats?: string[] }) => {
+        BarcodeDetector: new (options?: {
+          formats?: string[];
+        }) => {
           detect: (
             source: ImageBitmapSource,
           ) => Promise<Array<{ rawValue?: string }>>;
@@ -705,7 +719,8 @@ export default function StudentLocationPage() {
               Campus QR Locator
             </h1>
             <p className="text-zinc-500 mt-1">
-              Scan QR to know where you are, see your live position, and navigate yourself.
+              Scan QR to know where you are, see your live position, and
+              navigate yourself.
             </p>
           </div>
 
@@ -713,7 +728,8 @@ export default function StudentLocationPage() {
             <Card className="border-0 shadow-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <ScanLine className="h-5 w-5 text-red-600" /> QR Scanner & Analyzer
+                  <ScanLine className="h-5 w-5 text-red-600" /> QR Scanner &
+                  Analyzer
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -728,11 +744,18 @@ export default function StudentLocationPage() {
 
                 <div className="flex flex-wrap gap-2">
                   {!isScanning ? (
-                    <Button onClick={() => void startCameraScan()} className="gap-2">
+                    <Button
+                      onClick={() => void startCameraScan()}
+                      className="gap-2"
+                    >
                       <ScanLine className="h-4 w-4" /> Start Camera Scan
                     </Button>
                   ) : (
-                    <Button variant="destructive" onClick={stopCamera} className="gap-2">
+                    <Button
+                      variant="destructive"
+                      onClick={stopCamera}
+                      className="gap-2"
+                    >
                       Stop Scan
                     </Button>
                   )}
@@ -789,7 +812,9 @@ export default function StudentLocationPage() {
 
                 {hasScannedLocation && parsedLocation && (
                   <div className="rounded-xl border p-4 space-y-3 bg-white dark:bg-zinc-900">
-                    <div className="text-sm text-zinc-500">Detected Location</div>
+                    <div className="text-sm text-zinc-500">
+                      Detected Location
+                    </div>
                     <div className="font-semibold text-zinc-900 dark:text-white">
                       {parsedLocation.name}
                     </div>
@@ -810,7 +835,10 @@ export default function StudentLocationPage() {
                         className="gap-2"
                         onClick={() => {
                           window.open(
-                            toMapsDirectionsUrl(parsedLocation, currentLocation),
+                            toMapsDirectionsUrl(
+                              parsedLocation,
+                              currentLocation,
+                            ),
                             "_blank",
                             "noopener,noreferrer",
                           );
@@ -985,7 +1013,10 @@ export default function StudentLocationPage() {
                   </div>
                 </div>
 
-                <Button onClick={() => void generateCampusQr()} className="gap-2">
+                <Button
+                  onClick={() => void generateCampusQr()}
+                  className="gap-2"
+                >
                   <QrCode className="h-4 w-4" /> Generate Campus QR
                 </Button>
 
@@ -997,7 +1028,8 @@ export default function StudentLocationPage() {
                       className="w-56 h-56 object-contain rounded-md border mx-auto"
                     />
                     <p className="text-xs text-zinc-500 text-center">
-                      Scan this QR from another phone to test analyzer and navigation.
+                      Scan this QR from another phone to test analyzer and
+                      navigation.
                     </p>
                     <details>
                       <summary className="cursor-pointer text-xs text-zinc-500">
@@ -1015,12 +1047,16 @@ export default function StudentLocationPage() {
                     <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
                       Quick Campus QR Pack
                     </p>
-                    <Button variant="outline" onClick={() => void generatePresetPack()}>
+                    <Button
+                      variant="outline"
+                      onClick={() => void generatePresetPack()}
+                    >
                       Generate Presets
                     </Button>
                   </div>
                   <p className="text-xs text-zinc-500">
-                    Ready set of common campus points for printing and placement.
+                    Ready set of common campus points for printing and
+                    placement.
                   </p>
 
                   {generatedPresetQrs.length > 0 && (

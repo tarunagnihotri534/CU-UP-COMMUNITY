@@ -70,10 +70,7 @@
     "teamSize": "1 - 3 Members",
     "eligibility": "Students Across India",
     "conductedBy": "CU Coding Club",
-    "rounds": [
-      "Workshop: Team Formation",
-      "Workshop: Idea Validation"
-    ]
+    "rounds": ["Workshop: Team Formation", "Workshop: Idea Validation"]
   },
   {
     "id": "evt-2026-04-08-cloud-lab",

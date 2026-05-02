@@ -23,7 +23,8 @@ export const UNIVERSITY_LOCATIONS: UniversityLocation[] = [
   {
     id: "library",
     name: "Central Library",
-    description: "Multi-story library with extensive book and digital collection",
+    description:
+      "Multi-story library with extensive book and digital collection",
     latitude: 30.7635,
     longitude: 76.7796,
     building: "Building B",
