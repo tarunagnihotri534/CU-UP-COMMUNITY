@@ -11,6 +11,7 @@ import {
   CheckCircle,
   Clock,
   Github,
+  GraduationCap,
   MapPinned,
   Users,
   Zap,
