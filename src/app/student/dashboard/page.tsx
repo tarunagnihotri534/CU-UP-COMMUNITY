@@ -11,7 +11,7 @@ import {
   CheckCircle,
   Clock,
   Github,
-  GraduationCap,
+  GraduationCap as StudentIcon,
   MapPinned,
   Users,
   Zap,
@@ -80,7 +80,7 @@ export default function StudentDashboard() {
           className="flex flex-col items-center"
         >
           <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center mb-6 shadow-2xl shadow-red-600/20">
-            <GraduationCap size={40} className="text-white" />
+            <StudentIcon size={40} className="text-white" />
           </div>
           <h2 className="text-white font-black text-xl tracking-[0.2em]">
             CU-UP
